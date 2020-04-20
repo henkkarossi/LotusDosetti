@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Master {
+	//paljon viel‰ teht‰v‰‰
 
 	public enum State{ idle, medicine, notTaken, refill}
 	static State state = State.idle;
