@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Master {
-	//paljon viel� teht�v��
-	//roger that
+
 	public enum State{ idle, medicine, notTaken, refill}
+	
 	static State state = State.idle;
 	
 	static String patientName;
@@ -56,12 +56,12 @@ public class Master {
 	
 	public static void AtStart() 
 	{
-		//TODO täydennä
+		//TODO tÃ¤ydennÃ¤
 		//Jos load dataa ei löydy luo uudet tyhjät
 		
 		if(!LoadData()) 
 		{
-			patientName = "Täytä potilaan nimi";
+			patientName = "Anna potilaan nimi";
 					
 			for(int i = 0; i < slots.length; i++) 
 			{
@@ -75,8 +75,8 @@ public class Master {
 	
 	public static boolean LoadData() 
 	{
-		//TODO tässä pohja
-		//if(Katsoo löytyykö edellistä tallennusta)
+		//TODO tÃ¤ssÃ¤ pohja
+		//if(Katsoo lÃ¶ytyykÃ¶ edellistÃ¤ tallennusta)
 		//	Asettaa arvot kuten lokerolista samaksi kuin tallennetussa savessa
 		//return true;
 		//else
@@ -85,7 +85,7 @@ public class Master {
 	
 	public static void DeleteSaveData() 
 	{
-		//TODO poista tallennettu data filestä
+		//TODO poista tallennettu data filestÃ¤
 	}
 	
 	public static void Idle() throws InterruptedException 
@@ -100,11 +100,11 @@ public class Master {
 	
 	public static void Medicine() 
 	{
-		//TODO tee metodi joka siirtää slotin oikeaan kohtaan muistiinpanoja tähän liittyen löytyy planneristä
+		//TODO tee metodi joka siirtÃ¤Ã¤ slotin oikeaan kohtaan muistiinpanoja tÃ¤hÃ¤n liittyen lÃ¶ytyy planneristÃ¤
 		
-		//TODO tee metodi ja/tai luokka sensorille jota täältä kutsumalla selvittää 
+		//TODO tee metodi ja/tai luokka sensorille jota tÃ¤Ã¤ltÃ¤ kutsumalla selvittÃ¤Ã¤ 
 		
-		//TODO jos sensori palauttaa arvon tyhjä niin kutsu lokeron metodia tyhjennä
+		//TODO jos sensori palauttaa arvon tyhjÃ¤ niin kutsu lokeron metodia tyhjennÃ¤
 	}
 	
 	public static void NotTaken() 
@@ -114,16 +114,16 @@ public class Master {
 	
 	public static void Refill() 
 	{
-		//TODO moodi jonka aikana kannen voi avata ja lokerot voi täyttää
+		//TODO moodi jonka aikana kannen voi avata ja lokerot voi tÃ¤yttÃ¤Ã¤
 		
-		//TODO metedi joka käy kaikki lokerot läpi
-		//Jos lokero johon on merkitty että pitäisi olla lääkkeitä ja timeToTake
-		//Jos sensori sitten näkee että lokerossa on lääke se merkitsee lokeron tilan true ja false jos ei näe
+		//TODO metedi joka kÃ¤y kaikki lokerot lÃ¤pi
+		//Jos lokero johon on merkitty ettÃ¤ pitÃ¤isi olla lÃ¤Ã¤kkeitÃ¤ ja timeToTake
+		//Jos sensori sitten nÃ¤kee ettÃ¤ lokerossa on lÃ¤Ã¤ke se merkitsee lokeron tilan true ja false jos ei nÃ¤e
 	}
 	
 	public static List<Slot> CheckSlots(int timeThreshold)
 	{
-		//TODO katso onko missään lokerolistan lokerossa otto aika = nyt + ja - annettu aika esim 5 min vähemmän tai enemmän
+		//TODO katso onko missÃ¤Ã¤n lokerolistan lokerossa otto aika = nyt + ja - annettu aika esim 5 min vÃ¤hemmÃ¤n tai enemmÃ¤n
 		
 		List<Slot> found = new ArrayList<Slot>();
 		LocalDateTime now = LocalDateTime.now(); 
@@ -139,32 +139,32 @@ public class Master {
 		}
 		
 		//Palauttaa listan lokeroista joiden aika ottaa on nyt
-		//Yleensä 0-1 mutta jos enmmän niin palauttaa kaikki joiden aika on
-		//Tähän pitää keksiä ratkaisu esim 
-		//että siirtää liian lähellä samaan aikaan olevia tai että sovelluksen päässä lokeroiden ottoaikaa rajoitetaan ettei päällekkäisyyksiä synny
+		//YleensÃ¤ 0-1 mutta jos enmmÃ¤n niin palauttaa kaikki joiden aika on
+		//TÃ¤hÃ¤n pitÃ¤Ã¤ keksiÃ¤ ratkaisu esim 
+		//ettÃ¤ siirtÃ¤Ã¤ liian lÃ¤hellÃ¤ samaan aikaan olevia tai ettÃ¤ sovelluksen pÃ¤Ã¤ssÃ¤ lokeroiden ottoaikaa rajoitetaan ettei pÃ¤Ã¤llekkÃ¤isyyksiÃ¤ synny
 		return found;
 	}
 	
 	public void Notification() 
 	{
-		String notification = "Patient.name" + " on aika ottaa lääke!";
+		String notification = "Patient.name" + " on aika ottaa lÃ¤Ã¤ke!";
 		
 		System.out.print(notification);
 		
-		//TODO tänne koodipätkä että saadaan valo vilkkumaan Dosetissa
+		//TODO tÃ¤nne koodipÃ¤tkÃ¤ ettÃ¤ saadaan valo vilkkumaan Dosetissa
 		
-		//TODO tänne koodipätkä että Dosetti Ilmoittamaan äänellä että lääke pitää ottaa
+		//TODO tÃ¤nne koodipÃ¤tkÃ¤ ettÃ¤ Dosetti Ilmoittamaan Ã¤Ã¤nellÃ¤ ettÃ¤ lÃ¤Ã¤ke pitÃ¤Ã¤ ottaa
 	}
 	
 	public void SendMessage() 
 	{
-		//TODO Kun Patient/User ja Medicine luokat on tehty SendMessage(User user, Medicine medicine) jotta saadaa viestiin potilas, lääke ja lääkkeenottoaika
+		//TODO Kun Patient/User ja Medicine luokat on tehty SendMessage(User user, Medicine medicine) jotta saadaa viestiin potilas, lÃ¤Ã¤ke ja lÃ¤Ã¤kkeenottoaika
 		
-		String message = patientName + " on unohtanut ottaa lääkkeen " + "Medicine.name" + " aikaan " + "Medicine.timeToTake";
+		String message = patientName + " on unohtanut ottaa lÃ¤Ã¤kkeen " + "Medicine.name" + " aikaan " + "Medicine.timeToTake";
 		
 		System.out.print(message);
 		
-		//TODO pitää löytää tapa jolla message saadaan lähetettyä sovelluksee/tietokoneelle
+		//TODO pitÃ¤Ã¤ lÃ¶ytÃ¤Ã¤ tapa jolla message saadaan lÃ¤hetettyÃ¤ sovelluksee/tietokoneelle
 	}
 	
 

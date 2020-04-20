@@ -4,7 +4,7 @@ public class Medicine {
 
 	String name;
 	String description;
-	double dose;
+	double dose; //how many pills, pills can be divided
 	
 	public Medicine(String name, String description, double dose) 
 	{

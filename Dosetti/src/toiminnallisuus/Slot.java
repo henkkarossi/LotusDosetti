@@ -2,7 +2,6 @@ package toiminnallisuus;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Slot {
@@ -58,6 +57,7 @@ public class Slot {
 		this.id = id;
 	}
 
+	//onko erityinen syy, ettei metodin nimi ole getState?
 	public boolean isState() {
 		return state;
 	}
