@@ -19,4 +19,25 @@ public class Medicine {
 		this.description = "Write Description here";
 		this.dose = 0.0;
 	}
+	
+	public String getName() {
+		return this.name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public double getDose() {
+		return dose;
+	}
+
+	public void setDose(double dose) {
+		this.dose = dose;
+	}
+
+	@Override
+	public String toString() {
+		return name + ", " + dose;
+	}
 }

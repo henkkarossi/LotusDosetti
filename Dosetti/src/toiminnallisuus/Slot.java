@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Slot {
-
-	int id;
-	boolean state;
-	List<Medicine> medicines;
-	LocalDateTime timeToTake;
+	private int id;
+	private boolean state;
+	private List<Medicine> medicines;
+	private LocalDateTime timeToTake;
 	
 	public Slot(int id, boolean state, List<Medicine> medicines, LocalDateTime timeToTake)
 	{
@@ -72,5 +71,20 @@ public class Slot {
 
 	public void setTimeToTake(LocalDateTime timeToTake) {
 		this.timeToTake = timeToTake;
+	}
+	
+	@Override
+	public String toString() {
+		if (medicines.isEmpty()) {
+			return "No medicine in the slot " + this.id;
+		} else {
+			String msg = "The slot " + this.id + " contains medicines:";
+			
+			for (int i = 0; i < medicines.size(); i++) {
+				String medicineString = medicines.get(i).toString();
+				msg += "\n" + medicineString;
+			}
+			return msg;
+		}
 	}
 }
