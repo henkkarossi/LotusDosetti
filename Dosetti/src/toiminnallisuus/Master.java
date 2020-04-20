@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Master {
-	//paljon viel� teht�v��
-	//roger that
+
 	public enum State{ idle, medicine, notTaken, refill}
 	static State state = State.idle;
-	
 	static String patientName;
 	
 	static Slot[] slots = new Slot[14];
