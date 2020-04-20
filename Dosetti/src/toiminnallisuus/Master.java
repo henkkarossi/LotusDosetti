@@ -7,6 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Master {
 
+	//branch test
+	
 	public enum State{ idle, medicine, notTaken, refill}
 	static State state = State.idle;
 	static String patientName;
