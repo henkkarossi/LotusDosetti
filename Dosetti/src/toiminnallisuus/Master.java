@@ -135,10 +135,10 @@ public class Master {
 		
 		for(Slot slot:slots) 
 		{
-			if(slot.timeToTake.getYear() == now.getYear())
-				if(slot.timeToTake.getDayOfYear() == now.getDayOfYear())
-					if(slot.timeToTake.getHour() == now.getHour())
-						if(slot.timeToTake.getMinute() < now.getMinute() + timeThreshold && slot.timeToTake.getMinute() > now.getMinute() - timeThreshold)
+			if(slot.getTimeToTake().getYear() == now.getYear())
+				if(slot.getTimeToTake().getDayOfYear() == now.getDayOfYear())
+					if(slot.getTimeToTake().getHour() == now.getHour())
+						if(slot.getTimeToTake().getMinute() < now.getMinute() + timeThreshold && slot.getTimeToTake().getMinute() > now.getMinute() - timeThreshold)
 							found.add(slot);
 			
 		}
