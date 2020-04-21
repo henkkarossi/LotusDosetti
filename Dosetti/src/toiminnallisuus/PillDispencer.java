@@ -16,6 +16,7 @@ public class PillDispencer {
 	static String patientName;
 	
 	static Slot[] slots;
+	//test
 	
 	//TODO miten lokerolista 14kpl luodaan ensimmäisellä avauskerralla
 	//Ehkä mukaan Save Load logiikka
