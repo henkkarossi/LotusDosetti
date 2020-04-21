@@ -30,9 +30,9 @@ public class Part {
 	@Override
 	public String toString() {
 		if (this.status) {
-			return "The part " + name + " is ON.";
+			return "The part " + this.name + " is ON.";
 		} else {
-			return "The part " + name + " is OFF.";
+			return "The part " + this.name + " is OFF.";
 		}
 	}
 }

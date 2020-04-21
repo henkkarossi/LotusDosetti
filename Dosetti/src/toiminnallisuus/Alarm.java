@@ -24,9 +24,9 @@ public class Alarm extends Part{
 	@Override
 	public String toString() {
 		if (this.status) {
-			return "Alarm device " + name + " is ON.";
+			return "Alarm device " + this.name + " is ON.";
 		} else {
-			return "Alarm device " + name + " is OFF";
+			return "Alarm device " + this.name + " is OFF";
 		}
 	}
 }

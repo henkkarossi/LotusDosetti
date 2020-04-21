@@ -31,7 +31,13 @@ public class Motor extends Part {
 			//this.switchButton();
 			//this.pin =  PinState.HIGH; //tms?
 			this.status = true;
-			this.position += this.basicStep;
+			
+			if (this.position + this.basicStep < 2037.8864) {
+				this.position += this.basicStep;
+			} else {
+				//nollaa?
+			}
+			
 		}	
 	}
 	
@@ -45,9 +51,9 @@ public class Motor extends Part {
 	@Override
 	public String toString() {
 		if (this.status) {
-			return "The motor " + name + " is ON.";
+			return "The motor " + this.name + " is ON.";
 		} else {
-			return "The motor " + name + " is OFF.";
+			return "The motor " + this.name + " is OFF.";
 		}
 	}
 
