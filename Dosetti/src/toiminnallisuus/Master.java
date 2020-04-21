@@ -21,6 +21,11 @@ public class Master {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
+		
+		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//TODO Tee erikseen main metodi jonne kaikki dosetin käynnistys jutut
+		//ja tee tästä luokasta Dosetti
+		
 		AtStart();
 		
 		boolean running = true;
