@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Master {
+public class PillDispencer {
 
+	public static boolean running = false;
+	
 	public enum State{ idle, medicine, notTaken, refill}
 	
 	static State state = State.idle;
 	
 	static String patientName;
 	
-	static Slot[] slots = new Slot[14];
+	static Slot[] slots;
 	
 	//TODO miten lokerolista 14kpl luodaan ensimmäisellä avauskerralla
 	//Ehkä mukaan Save Load logiikka
@@ -21,15 +23,7 @@ public class Master {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
-		
-		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//TODO Tee erikseen main metodi jonne kaikki dosetin käynnistys jutut
-		//ja tee tästä luokasta Dosetti
-		
-		AtStart();
-		
-		boolean running = true;
-		
+
 		while(running) 
 		{
 			switch(state) 
@@ -57,40 +51,6 @@ public class Master {
 			}
 		}
 
-	}
-	
-	public static void AtStart() 
-	{
-		//TODO tÃ¤ydennÃ¤
-		//Jos load dataa ei löydy luo uudet tyhjät
-		
-		if(!LoadData()) 
-		{
-			patientName = "Anna potilaan nimi";
-					
-			for(int i = 0; i < slots.length; i++) 
-			{
-				slots[i].setId(i + 1);
-				slots[i].setState(false);
-				slots[i].emptyMedicines();
-				slots[i].setTimeToTake(null);
-			}
-		}
-	}
-	
-	public static boolean LoadData() 
-	{
-		//TODO tÃ¤ssÃ¤ pohja
-		//if(Katsoo lÃ¶ytyykÃ¶ edellistÃ¤ tallennusta)
-		//	Asettaa arvot kuten lokerolista samaksi kuin tallennetussa savessa
-		//return true;
-		//else
-		return false;
-	}
-	
-	public static void DeleteSaveData() 
-	{
-		//TODO poista tallennettu data filestÃ¤
 	}
 	
 	public static void Idle() throws InterruptedException 
@@ -171,6 +131,12 @@ public class Master {
 		
 		//TODO pitÃ¤Ã¤ lÃ¶ytÃ¤Ã¤ tapa jolla message saadaan lÃ¤hetettyÃ¤ sovelluksee/tietokoneelle
 	}
+	
+	public static void CreateSlots(int numberOfSlots) 
+	{
+		slots = new Slot[numberOfSlots];
+	}
+	
 	
 
 }

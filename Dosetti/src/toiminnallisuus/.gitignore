@@ -3,3 +3,12 @@
 /Medicine.class
 /Slot.class
 /Motor.class
+/Alarm.class
+/Part.class
+/Screen.class
+/Main.class
+/Dosetti$State.class
+/Dosetti.class
+/PillDispencer$State.class
+/PillDispencer.class
+/Sensor.class
