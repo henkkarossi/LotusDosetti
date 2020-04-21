@@ -58,8 +58,7 @@ public class Slot {
 		this.id = id;
 	}
 
-	//onko erityinen syy, ettei metodin nimi ole getState?
-	public boolean isState() {
+	public boolean getState() {
 		return state;
 	}
 
