@@ -1,7 +1,7 @@
 package toiminnallisuus;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		//TODO tÃ¤ydennÃ¤
 				//Jos load dataa ei löydy luo uudet tyhjät
@@ -16,6 +16,7 @@ public class Main {
 	
 	public static boolean LoadData() 
 	{
+		//Minna testaa githubia
 		//TODO tÃ¤ssÃ¤ pohja
 		//if(Katsoo lÃ¶ytyykÃ¶ edellistÃ¤ tallennusta)
 		//	Asettaa arvot kuten lokerolista samaksi kuin tallennetussa savessa
