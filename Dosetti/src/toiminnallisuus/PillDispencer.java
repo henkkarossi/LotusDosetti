@@ -18,6 +18,8 @@ public class PillDispencer {
 	static Slot[] slots;
 	//test
 	
+	//Jutan testikoodia :)
+	
 	//TODO miten lokerolista 14kpl luodaan ensimmäisellä avauskerralla
 	//Ehkä mukaan Save Load logiikka
 	//Avatessa loadaa ja jos ei löydy savea luo uudet lokerot
