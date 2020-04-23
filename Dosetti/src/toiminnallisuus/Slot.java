@@ -45,9 +45,9 @@ public class Slot {
 
 	
 	//tyhjennä lokero metodi? pitäisikö olla mieluummin this.medicines.clear()?
-	public void emptyMedicines() 
+	public void clearMedicines() 
 	{
-		this.medicines = new ArrayList<Medicine>();
+		this.medicines.clear();
 	}
 	
 	public int getId() {

@@ -15,14 +15,7 @@ public class PillDispencer {
 	
 	static String patientName;
 	
-	static Slot[] slots;
-	//test
-	
-	//Jutan testikoodia :)
-	
-	//TODO miten lokerolista 14kpl luodaan ensimmäisellä avauskerralla
-	//Ehkä mukaan Save Load logiikka
-	//Avatessa loadaa ja jos ei löydy savea luo uudet lokerot
+	public static Slot[] slots;
 	
 	public static void main(String[] args) throws InterruptedException {
 		
@@ -113,9 +106,25 @@ public class PillDispencer {
 		return found;
 	}
 	
+	public static void CreateSlots(int numberOfSlots) 
+	{
+		slots = new Slot[numberOfSlots];
+		
+		for(int i = 0; i < slots.length; i++) 
+		{
+			slots[i] = new Slot();
+			
+			slots[i].setId(i);
+			slots[i].setState(false);
+			slots[i].clearMedicines();
+			slots[i].setTimeToTake(null);
+		}
+	}
+	
+	
 	public void Notification() 
 	{
-		String notification = "Patient.name" + " on aika ottaa lÃ¤Ã¤ke!";
+		String notification = "Patient.name" + " on aika ottaa laake!";
 		
 		System.out.print(notification);
 		
@@ -135,10 +144,7 @@ public class PillDispencer {
 		//TODO pitÃ¤Ã¤ lÃ¶ytÃ¤Ã¤ tapa jolla message saadaan lÃ¤hetettyÃ¤ sovelluksee/tietokoneelle
 	}
 	
-	public static void CreateSlots(int numberOfSlots) 
-	{
-		slots = new Slot[numberOfSlots];
-	}
+	
 	
 	
 
