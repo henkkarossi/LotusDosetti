@@ -4,11 +4,11 @@ import org.json.simple.parser.ParseException;
 
 public class Main {
 	
-	public static PillDispencer pl;
+	public static PillDispenser pl;
 	
 	public static void main(String[] args) throws ParseException {
 		
-		pl = new PillDispencer();
+		pl = new PillDispenser();
 
 		DataManager.CreateNewBaseData();
 		//DataManager.SaveData();
@@ -16,7 +16,7 @@ public class Main {
 		
 		System.out.print(pl.slots[4].getState());
 				
-		PillDispencer.running = true;
+		PillDispenser.running = true;
 	}
 	
 	

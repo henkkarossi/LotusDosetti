@@ -13,3 +13,5 @@
 /PillDispencer.class
 /Sensor.class
 /DataManager.class
+/PillDispenser$State.class
+/PillDispenser.class
