@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class PillDispencer {
+public class PillDispenser {
 
 	public static boolean running = false;
 	

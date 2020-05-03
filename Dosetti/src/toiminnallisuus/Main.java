@@ -4,19 +4,20 @@ import org.json.simple.parser.ParseException;
 
 public class Main {
 	
-	public static PillDispencer pl;
+	public static PillDispenser pl;
 	
 	public static void main(String[] args) throws ParseException {
 		
-		pl = new PillDispencer();
+		
+		pl = new PillDispenser();
 
 		DataManager.CreateNewBaseData();
 		//DataManager.SaveData();
 		DataManager.LoadData();
 		
-		System.out.print(pl.slots[4].getState());
+		System.out.print(pl.slots[0].getState());
 				
-		PillDispencer.running = true;
+		PillDispenser.running = true;
 	}
 	
 	

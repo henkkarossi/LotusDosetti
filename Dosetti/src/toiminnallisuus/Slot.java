@@ -43,8 +43,6 @@ public class Slot {
 		}
 	}
 
-	
-	//tyhjennä lokero metodi? pitäisikö olla mieluummin this.medicines.clear()?
 	public void clearMedicines() 
 	{
 		this.medicines.clear();

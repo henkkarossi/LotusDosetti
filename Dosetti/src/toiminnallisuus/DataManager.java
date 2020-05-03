@@ -20,8 +20,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
-
 public class DataManager {
 
 	static String filename = "slotdata.txt";
@@ -157,9 +155,9 @@ public class DataManager {
 	
 	public static void CreateNewBaseData() 
 	{
-		PillDispencer.patientName = "Anna potilaan nimi";
+		PillDispenser.patientName = "Anna potilaan nimi";
 		
-		PillDispencer.CreateSlots(14);
+		PillDispenser.CreateSlots(14);
 	
 	}
 }
