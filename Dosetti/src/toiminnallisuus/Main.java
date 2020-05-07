@@ -6,18 +6,23 @@ public class Main {
 	
 	public static PillDispenser pl;
 	
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws Exception {
 		
 		
 		pl = new PillDispenser();
 
 		DataManager.CreateNewBaseData();
-		//DataManager.SaveData();
-		DataManager.LoadData();
+		
+		///Kommentoi pois jos ei ole demo !!!!!!!!!!!!!!!!!!!!!!!
+		pl.CreateDemo();
+		
+		DataManager.SaveData();
+		//DataManager.LoadData();
 		
 		System.out.print(pl.slots[0].getState());
-				
-		PillDispenser.running = true;
+		
+		pl.running = true;
+		pl.main(null);
 	}
 	
 	

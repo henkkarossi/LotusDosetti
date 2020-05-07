@@ -1,9 +1,12 @@
 package toiminnallisuus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import toiminnallisuus.RgbSensor.ColorReading;
 
 public class PillDispenser {
 
@@ -17,8 +20,16 @@ public class PillDispenser {
 	
 	public static Slot[] slots;
 	
-	public static void main(String[] args) throws InterruptedException {
+	//index
+	public static int currentSlot;
+	
+	static ColorReading colorTreshold;
+	
+	public static void main(String[] args) throws Exception {
 		
+		int ontop = 30;
+		
+		colorTreshold = ColorReading(386 + ontop, 178 + ontop, 220 + ontop, 762 + ontop);
 
 		while(running) 
 		{
@@ -49,26 +60,36 @@ public class PillDispenser {
 
 	}
 	
+	private static ColorReading ColorReading(int i, int j, int k, int l) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public static void Idle() throws InterruptedException 
 	{
 		TimeUnit.SECONDS.sleep(1);
+		
+		System.out.println("idle running");
 
-		if(CheckSlots(3).size() > 0) 
+		List<Slot> found = CheckSlots(0.3);
+		
+		if(found.size() > 0) 
 		{
+			currentSlot = found.get(0).getId();
+			
 			state = State.takeMedicine;
 		}
 	}
 	
-	public static void TakeMedicine() throws InterruptedException 
+	public static void TakeMedicine() throws Exception 
 	{
 		//TODO tee metodi joka siirtÃ¤Ã¤ slotin oikeaan kohtaan muistiinpanoja tÃ¤hÃ¤n liittyen lÃ¶ytyy planneristÃ¤
 		
 		//TODO tee metodi ja/tai luokka sensorille jota tÃ¤Ã¤ltÃ¤ kutsumalla selvittÃ¤Ã¤ 
 		
-		
-		
 		Motor motor = new Motor();
 		
+		System.out.print("step");
 		motor.TakeStep(1);
 		
 		boolean medicineTaken = false;
@@ -80,15 +101,35 @@ public class PillDispenser {
 			//false jatkaa koska lääkettä ei ole vielä otettu
 			//true lopettaa loopin koska lääke on otettu ja palauttaa state idleen
 			
-			TimeUnit.SECONDS.sleep(1);
-			timer++;
+			RgbSensor sensor = new RgbSensor();
+			
+			ColorReading color = sensor.getReading();
+			
+			
+			if(color.getRed() < colorTreshold.getRed() && color.getGreen() < colorTreshold.getGreen() && color.getBlue() < colorTreshold.getBlue())
+			{
+				//jos luukku on tyhja eli arvot ovat matalemmat kuin treshold merkkaa luukku tyhjaksi ja palaa idleen
+				slots[currentSlot].setState(false);
+				medicineTaken = true;
+				state = State.idle;
+			}
+			else
+			{
+				// luukku ei ole tyhjä eli arvot ovat isompia kuin treshold toista tarkastamistasecunnin päästä uudestaan
+				TimeUnit.SECONDS.sleep(1);
+				timer++;
+				
+			}
+			
+			//jos loopin loputtua lääkettä ei ole vieläkään otettu mene not Taken
+			state = State.notTaken;
 		}
 		
 	}
 	
 	public static void NotTaken() 
 	{
-		
+		//TODO lähetä firebaseen viesti että lääke on jäänyt ottamatta
 	}
 	
 	public static void Refill() 
@@ -100,7 +141,7 @@ public class PillDispenser {
 		//Jos sensori sitten nÃ¤kee ettÃ¤ lokerossa on lÃ¤Ã¤ke se merkitsee lokeron tilan true ja false jos ei nÃ¤e
 	}
 	
-	public static List<Slot> CheckSlots(int timeThreshold)
+	public static List<Slot> CheckSlots(double d)
 	{
 		//TODO katso onko missÃ¤Ã¤n lokerolistan lokerossa otto aika = nyt + ja - annettu aika esim 5 min vÃ¤hemmÃ¤n tai enemmÃ¤n
 		
@@ -112,7 +153,7 @@ public class PillDispenser {
 			if(slot.getTimeToTake().getYear() == now.getYear())
 				if(slot.getTimeToTake().getDayOfYear() == now.getDayOfYear())
 					if(slot.getTimeToTake().getHour() == now.getHour())
-						if(slot.getTimeToTake().getMinute() < now.getMinute() + timeThreshold && slot.getTimeToTake().getMinute() > now.getMinute() - timeThreshold)
+						if(slot.getTimeToTake().getMinute() < now.getMinute() + d && slot.getTimeToTake().getMinute() > now.getMinute() - d)
 							found.add(slot);
 			
 		}
@@ -136,6 +177,21 @@ public class PillDispenser {
 			slots[i].setState(false);
 			slots[i].clearMedicines();
 			slots[i].setTimeToTake(null);
+		}
+	}
+	
+	public static void CreateDemo() 
+	{
+		slots = new Slot[14];
+		
+		for(int i = 0; i < slots.length; i++) 
+		{
+			slots[i] = new Slot();
+			
+			slots[i].setId(i);
+			slots[i].setState(true);
+			slots[i].clearMedicines();
+			slots[i].setTimeToTake(LocalDateTime.now().plusMinutes(i+1));
 		}
 	}
 	
