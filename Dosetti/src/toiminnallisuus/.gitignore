@@ -15,3 +15,7 @@
 /DataManager.class
 /PillDispenser$State.class
 /PillDispenser.class
+/RgbSensor$ColorReading.class
+/RgbSensor.class
+/UseSensor.class
+/PillDispenserMotorDemo.class

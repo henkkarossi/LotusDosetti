@@ -1,5 +1,34 @@
 package toiminnallisuus;
 
+/*
+ * #%L
+ * **********************************************************************
+ * ORGANIZATION  :  Pi4J
+ * PROJECT       :  Pi4J :: Java Examples
+ * FILENAME      :  StepperMotorGpioExample.java
+ *
+ * This file is part of the Pi4J project. More information about
+ * this project can be found here:  https://www.pi4j.com/
+ * **********************************************************************
+ * %%
+ * Copyright (C) 2012 - 2019 Pi4J
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ *
+ * You should have received a copy of the GNU General Lesser Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
+
 import com.pi4j.component.motor.impl.GpioStepperMotorComponent;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
@@ -7,70 +36,19 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
-public class Motor extends Part {
-	private String name; //our motor for pill dispenser is a step motor
-	private boolean status; //on (=true) or off (=false)
-	private double basicStep; //normal step that motor need to take to travel one slot width
-	private int position; //=how many steps taken
-	//private int pin; selvitä tätä varten moottorin pinni vai pinnilista Part- luokasta?
-	
-	
-	public Motor() {
-		this.name = "askelmoottori"; //vai alustetaanko? = new GpioStepperMotorComponent(pins);
-		this.status = false;
-		this.basicStep = 145.56; //kts. metodista step() selitys 
-		this.position = 0; //starting position, koko kierros on 2038 askelta
-		//this.pin = null;
-	}
-	
-	//moottorille käsky ottaa yksi basicStep vai onko valmiina step?
-	/*apuna tutorial: http://www.savagehomeautomation.com/jj-stepper
-	 *  // There are 32 steps per revolution on my sample motor,
-        // and inside is a ~1/64 reduction gear set.
-        // Gear reduction is actually: (32/9)/(22/11)x(26/9)x(31/10)=63.683950617
-        // This means is that there are really 32*63.683950617 steps per revolution
-        // =  2037.88641975 ~ 2038 steps! 
-         * --> joten yksi askel on 2037.88641975/14 = 145.5633156... askelta per lokero?*/
-	
-	public void step() {
-		if (this.getStatus() == false) {
-			//käynnistä moottori
-			//this.switchButton();
-			//this.pin =  PinState.HIGH; //tms?
-			this.status = true;
-			
-			if (this.position + this.basicStep < 2037.8864) {
-				this.position += this.basicStep;
-			} else {
-				//nollaa?
-			}
-			
-		}	
-	}
-	
-	//moottorin nollaaminen alkukohtaan
-	public void resetStartPosition() {
-		//motor REVERSE otetut askeleet? jolloin ->
-		this.position = 0;
-	}
-	
-	
-	@Override
-	public String toString() {
-		if (this.status) {
-			return "The motor " + this.name + " is ON.";
-		} else {
-			return "The motor " + this.name + " is OFF.";
-		}
-	}
-	
-	public void TakeStep(int amount) throws InterruptedException 
-	{
-		int fullRotation = 2038;
-		long slot = fullRotation / Main.pl.slots.length;
-		
-		long move = slot * amount;
-		
+/**
+ * This example code demonstrates how to control a stepper motor
+ * using the GPIO pins on the Raspberry Pi.
+ *
+ * FROM @author Robert Savage
+ * --> copied and modified for our demo - ICTeam (Melissa)
+ */
+
+public class PillDispenserMotorDemo {
+	public static void main(String[] args) throws InterruptedException {
+
+        System.out.println("<--Pi4J--> GPIO Stepper Motor Example ... started.");
+
         // create gpio controller
         final GpioController gpio = GpioFactory.getInstance();
 
@@ -109,18 +87,36 @@ public class Motor extends Part {
         // This means is that there are really 32*63.683950617 steps per revolution =  2037.88641975 ~ 2038 steps!
         
         //Melissa: So, if our pill dispenser has 14 slots in it, one slot equals 2038 / 14 = 145,5714285... ~ 146 steps 
-        motor.setStepsPerRevolution(fullRotation);
+        motor.setStepsPerRevolution(2038);
 
-        motor.step(move);
+        // test motor control : STEPPING FORWARD
+        System.out.println("   Motor FORWARD for 2038 steps.");
+        motor.step(2038);
+        System.out.println("   Motor STOPPED for 2 seconds.");
+        Thread.sleep(2000);
+
+        // test motor control : STEPPING REVERSE
+        System.out.println("   Motor REVERSE for 2038 steps.");
+        motor.step(-2038);
+        System.out.println("   Motor STOPPED for 2 seconds.");
+        Thread.sleep(2000);
         
+        // Melissa: test motor control : TAKING 'SLOT STEPS', i.e. 146 steps / slot, for an entire revolution  
+        for (int i = 1; i < 15; i++) {
+            System.out.println("   Motor FORWARD: step over slot number " + i);
+            motor.step(146);
+            System.out.println("   Motor STOPPED for 1 second.");
+            Thread.sleep(1000);
+        }
+
+        // final stop to ensure no motor activity
         motor.stop();
 
         // stop all GPIO activity/threads by shutting down the GPIO controller
         // (this method will forcefully shutdown all GPIO monitoring threads and scheduled tasks)
         gpio.shutdown();
-	}
 
-	
-
+        System.out.println("Exiting PillDispenserMotorDemo");
+    }
 
 }

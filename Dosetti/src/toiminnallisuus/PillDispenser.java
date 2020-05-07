@@ -9,7 +9,7 @@ public class PillDispenser {
 
 	public static boolean running = false;
 	
-	public enum State{ idle, medicine, notTaken, refill}
+	public enum State{ idle, takeMedicine, notTaken, refill}
 	
 	static State state = State.idle;
 	
@@ -29,8 +29,8 @@ public class PillDispenser {
 				Idle();
 				break;
 				
-			case medicine:
-				Medicine();
+			case takeMedicine:
+				TakeMedicine();
 				break;
 				
 			case notTaken:
@@ -55,17 +55,35 @@ public class PillDispenser {
 
 		if(CheckSlots(3).size() > 0) 
 		{
-			state = State.medicine;
+			state = State.takeMedicine;
 		}
 	}
 	
-	public static void Medicine() 
+	public static void TakeMedicine() throws InterruptedException 
 	{
 		//TODO tee metodi joka siirtÃ¤Ã¤ slotin oikeaan kohtaan muistiinpanoja tÃ¤hÃ¤n liittyen lÃ¶ytyy planneristÃ¤
 		
 		//TODO tee metodi ja/tai luokka sensorille jota tÃ¤Ã¤ltÃ¤ kutsumalla selvittÃ¤Ã¤ 
 		
-		//TODO jos sensori palauttaa arvon tyhjÃ¤ niin kutsu lokeron metodia tyhjennÃ¤
+		
+		
+		Motor motor = new Motor();
+		
+		motor.TakeStep(1);
+		
+		boolean medicineTaken = false;
+		
+		for(int timer = 0; timer < 100 && !medicineTaken;) 
+		{
+			//TODO 
+			//Kutsu sensoria jos palauttaa 
+			//false jatkaa koska lääkettä ei ole vielä otettu
+			//true lopettaa loopin koska lääke on otettu ja palauttaa state idleen
+			
+			TimeUnit.SECONDS.sleep(1);
+			timer++;
+		}
+		
 	}
 	
 	public static void NotTaken() 
