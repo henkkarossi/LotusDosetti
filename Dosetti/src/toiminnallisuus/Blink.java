@@ -21,7 +21,7 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
 public class Blink {
 
-	static boolean on = false;
+	static boolean on = true;
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -32,6 +32,8 @@ public class Blink {
 
         if(on)
         led1.blink(500, 15000);
+        
+        on = false;
 
     }
     
