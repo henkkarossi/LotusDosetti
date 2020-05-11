@@ -91,7 +91,7 @@ public class PillDispenser {
 		
 		Blink blink = new Blink();
 		
-		blink.main(null);
+		
 		
 		blink.OnOff(true);
 		
@@ -106,6 +106,8 @@ public class PillDispenser {
 			//Kutsu sensoria jos palauttaa 
 			//false jatkaa koska lääkettä ei ole vielä otettu
 			//true lopettaa loopin koska lääke on otettu ja palauttaa state idleen
+			
+			blink.main(null);
 			
 			RgbSensor sensor = new RgbSensor();
 			
