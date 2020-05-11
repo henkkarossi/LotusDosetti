@@ -91,9 +91,11 @@ public class PillDispenser {
 		
 		Blink blink = new Blink();
 		
-		blink.main(null);
-		
+		blink.setRunning(true);
 		blink.OnOff(true);
+		
+		blink.main(null);
+	
 		
 		System.out.print("step");
 		motor.TakeStep(1);
@@ -107,6 +109,7 @@ public class PillDispenser {
 			//false jatkaa koska lääkettä ei ole vielä otettu
 			//true lopettaa loopin koska lääke on otettu ja palauttaa state idleen
 			
+			
 			RgbSensor sensor = new RgbSensor();
 			
 			ColorReading color = sensor.getReading();
@@ -117,7 +120,9 @@ public class PillDispenser {
 				//jos luukku on tyhja eli arvot ovat matalemmat kuin treshold merkkaa luukku tyhjaksi ja palaa idleen
 				slots[currentSlot].setState(false);
 				medicineTaken = true;
+				
 				blink.OnOff(false);
+				
 				state = State.idle;
 			}
 			else
@@ -157,11 +162,13 @@ public class PillDispenser {
 		
 		for(Slot slot:slots) 
 		{
-			if(slot.getTimeToTake().getYear() == now.getYear())
-				if(slot.getTimeToTake().getDayOfYear() == now.getDayOfYear())
-					if(slot.getTimeToTake().getHour() == now.getHour())
-						if(slot.getTimeToTake().getMinute() < now.getMinute() + d && slot.getTimeToTake().getMinute() > now.getMinute() - d)
-							found.add(slot);
+
+			if(slot.getTimeToTake() != null)
+				if(slot.getTimeToTake().getYear() == now.getYear())
+					if(slot.getTimeToTake().getDayOfYear() == now.getDayOfYear())
+						if(slot.getTimeToTake().getHour() == now.getHour())
+							if(slot.getTimeToTake().getMinute() < now.getMinute() + d && slot.getTimeToTake().getMinute() > now.getMinute() - d)
+								found.add(slot);
 			
 		}
 		
@@ -189,7 +196,6 @@ public class PillDispenser {
 	
 	public static void CreateDemo() 
 	{
-		slots = new Slot[14];
 		
 		slots[0] = new Slot();
 		

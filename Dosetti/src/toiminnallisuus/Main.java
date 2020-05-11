@@ -11,7 +11,7 @@ public class Main {
 		
 		pl = new PillDispenser();
 
-		//DataManager.CreateNewBaseData();
+		DataManager.CreateNewBaseData();
 		
 		///Kommentoi pois jos ei ole demo !!!!!!!!!!!!!!!!!!!!!!!
 		pl.CreateDemo();
