@@ -28,7 +28,7 @@ public class Blink {
 
         final GpioController gpio = GpioFactory.getInstance();
 
-        final GpioPinDigitalOutput led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01);
+        final GpioPinDigitalOutput led1 = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_04);
 
         if(on)
         led1.blink(500, 15000);
