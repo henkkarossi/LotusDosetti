@@ -184,15 +184,10 @@ public class PillDispenser {
 	{
 		slots = new Slot[14];
 		
-		for(int i = 0; i < slots.length; i++) 
-		{
-			slots[i] = new Slot();
-			
-			slots[i].setId(i);
-			slots[i].setState(true);
-			slots[i].clearMedicines();
-			slots[i].setTimeToTake(LocalDateTime.now().plusMinutes(i+1));
-		}
+		slots[0].setId(0);
+		slots[0].setState(true);
+		slots[0].clearMedicines();
+		slots[0].setTimeToTake(LocalDateTime.now().plusSeconds(30));
 	}
 	
 	
