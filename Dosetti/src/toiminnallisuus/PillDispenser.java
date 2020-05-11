@@ -89,12 +89,18 @@ public class PillDispenser {
 		
 		Motor motor = new Motor();
 		
+		Blink blink = new Blink();
+		
+		blink.main(null);
+		
+		blink.OnOff(true);
+		
 		System.out.print("step");
 		motor.TakeStep(1);
 		
 		boolean medicineTaken = false;
 		
-		for(int timer = 0; timer < 100 && !medicineTaken;) 
+		for(int timer = 0; timer < 200 && !medicineTaken;) 
 		{
 			//TODO 
 			//Kutsu sensoria jos palauttaa 
@@ -111,6 +117,7 @@ public class PillDispenser {
 				//jos luukku on tyhja eli arvot ovat matalemmat kuin treshold merkkaa luukku tyhjaksi ja palaa idleen
 				slots[currentSlot].setState(false);
 				medicineTaken = true;
+				blink.OnOff(false);
 				state = State.idle;
 			}
 			else
