@@ -11,12 +11,12 @@ public class Main {
 		
 		pl = new PillDispenser();
 
-		DataManager.CreateNewBaseData();
+		//DataManager.CreateNewBaseData();
 		
 		///Kommentoi pois jos ei ole demo !!!!!!!!!!!!!!!!!!!!!!!
 		pl.CreateDemo();
 		
-		DataManager.SaveData();
+		//DataManager.SaveData();
 		//DataManager.LoadData();
 		
 		System.out.print(pl.slots[0].getState());

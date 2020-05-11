@@ -18,7 +18,7 @@ public class PillDispenser {
 	
 	static String patientName;
 	
-	public static Slot[] slots;
+	public static  Slot[] slots;
 	
 	//index
 	public static int currentSlot;
@@ -71,7 +71,7 @@ public class PillDispenser {
 		
 		System.out.println("idle running");
 
-		List<Slot> found = CheckSlots(0.3);
+		List<Slot> found = CheckSlots(0.01);
 		
 		if(found.size() > 0) 
 		{
@@ -191,10 +191,14 @@ public class PillDispenser {
 	{
 		slots = new Slot[14];
 		
+		slots[0] = new Slot();
+		
 		slots[0].setId(0);
 		slots[0].setState(true);
 		slots[0].clearMedicines();
 		slots[0].setTimeToTake(LocalDateTime.now().plusSeconds(30));
+
+		
 	}
 	
 	
