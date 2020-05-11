@@ -162,11 +162,13 @@ public class PillDispenser {
 		
 		for(Slot slot:slots) 
 		{
-			if(slot.getTimeToTake().getYear() == now.getYear())
-				if(slot.getTimeToTake().getDayOfYear() == now.getDayOfYear())
-					if(slot.getTimeToTake().getHour() == now.getHour())
-						if(slot.getTimeToTake().getMinute() < now.getMinute() + d && slot.getTimeToTake().getMinute() > now.getMinute() - d)
-							found.add(slot);
+
+			if(slot.getTimeToTake() != null)
+				if(slot.getTimeToTake().getYear() == now.getYear())
+					if(slot.getTimeToTake().getDayOfYear() == now.getDayOfYear())
+						if(slot.getTimeToTake().getHour() == now.getHour())
+							if(slot.getTimeToTake().getMinute() < now.getMinute() + d && slot.getTimeToTake().getMinute() > now.getMinute() - d)
+								found.add(slot);
 			
 		}
 		
@@ -194,7 +196,6 @@ public class PillDispenser {
 	
 	public static void CreateDemo() 
 	{
-		slots = new Slot[14];
 		
 		slots[0] = new Slot();
 		
