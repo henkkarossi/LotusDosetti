@@ -91,9 +91,11 @@ public class PillDispenser {
 		
 		Blink blink = new Blink();
 		
-		
-		
+		blink.setRunning(true);
 		blink.OnOff(true);
+		
+		blink.main(null);
+	
 		
 		System.out.print("step");
 		motor.TakeStep(1);
@@ -107,7 +109,6 @@ public class PillDispenser {
 			//false jatkaa koska lääkettä ei ole vielä otettu
 			//true lopettaa loopin koska lääke on otettu ja palauttaa state idleen
 			
-			blink.main(null);
 			
 			RgbSensor sensor = new RgbSensor();
 			
@@ -119,7 +120,9 @@ public class PillDispenser {
 				//jos luukku on tyhja eli arvot ovat matalemmat kuin treshold merkkaa luukku tyhjaksi ja palaa idleen
 				slots[currentSlot].setState(false);
 				medicineTaken = true;
+				
 				blink.OnOff(false);
+				
 				state = State.idle;
 			}
 			else
