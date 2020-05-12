@@ -135,7 +135,8 @@ public class PillDispenser {
 			{
 				//jos luukku on tyhja eli arvot ovat matalemmat kuin treshold merkkaa luukku tyhjaksi ja palaa idleen
 				
-				fb.updateTime();	
+				fb.updateTime();
+				fb.updateStatus(true);
 				fb.close();
 				led.setLow();
 				medicineTaken = true;
