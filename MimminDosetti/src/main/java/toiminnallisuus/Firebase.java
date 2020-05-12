@@ -1,15 +1,12 @@
 package toiminnallisuus;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -23,7 +20,6 @@ public class Firebase {
 	private static final String account = "innovointiprojekti2020-firebase-adminsdk-4qh1l-9887938033.json";
 	private static final String url = "https://innovointiprojekti2020.firebaseio.com";
 	private static FileInputStream serviceAccount = null;
-	private static HttpClient client = HttpClient.newHttpClient();
 
 	public void updateTime() {
 		try {
@@ -101,12 +97,23 @@ public class Firebase {
 
 	}
 
-	public static String get(String uri) throws Exception {
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).build();
+	public static String get(String address) throws Exception {
+		String response = null;
+		
+		try {
+			   URL url = new URL(address);
+			   Scanner s = new Scanner(url.openStream());
+			   response = s.nextLine();
+			   System.out.println(response);
+			}
+			catch(IOException ex) {
+			   // there was some connection problem, or the file did not exist on the server,
+			   // or your URL was not in the right format.
+			   // think about what to do now, and put it here.
+			   ex.printStackTrace(); // for now, simply output it.
+			}
 
-        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-
-        return response.body();
+        return response;
     }
 	
 	public DatabaseReference getRef() throws IOException {

@@ -70,8 +70,7 @@ public class PillDispenser {
 
 		while(idle) {
 			LocalDateTime now = LocalDateTime.now();
-			LocalDate date = LocalDate.now();
-			LocalDateTime timeToTake = date.atTime(11, 28);
+			LocalDateTime timeToTake = getDateTime();
 			
 			if (now.isAfter(timeToTake)) {
 				idle = false;
@@ -112,7 +111,7 @@ public class PillDispenser {
 		
 		
 		
-		//Firebase fb = new Firebase();  !!!!!
+		Firebase fb = new Firebase(); 
 			
 		led.setHigh();
 		
@@ -136,8 +135,8 @@ public class PillDispenser {
 			{
 				//jos luukku on tyhja eli arvot ovat matalemmat kuin treshold merkkaa luukku tyhjaksi ja palaa idleen
 				
-				//fb.updateTime();	
-				//fb.close();
+				fb.updateTime();	
+				fb.close();
 				led.setLow();
 				medicineTaken = true;
 				
@@ -162,9 +161,9 @@ public class PillDispenser {
 	
 	public void NotTaken() throws IOException 
 	{
-		//Firebase fb = new Firebase();
-		//fb.updateStatus(false);
-		//fb.close();	
+		Firebase fb = new Firebase();
+		fb.updateStatus(false);
+		fb.close();	
 		led.setLow();
 		System.out.println("Not taken");
 		state = State.idle;
