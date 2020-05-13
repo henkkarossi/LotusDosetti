@@ -37,6 +37,7 @@ public class Blink {
         	
         	if(on)
         		led1.blink(500, 15000);
+        	led1.toggle();
         
         }
 
